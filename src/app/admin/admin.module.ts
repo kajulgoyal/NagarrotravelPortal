@@ -5,28 +5,34 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminTicketDetailsComponent } from './adminticketdetails/adminticketdetails.component';
 import { TicketlistComponent } from './ticketlist/ticketlist.component';
 import { NavbarModule } from '../user/navbar/navbar.module';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipe } from './filter.pipe';
+import { SortByPipe } from './sortby.pipe';
+import { FormsModule } from '@angular/forms';
 
 
-@NgModule({ 
+@NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
     NavbarModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
-  exports:[
+  exports: [
     AdminComponent,
     TicketlistComponent,
-    AdminTicketDetailsComponent
- 
+    AdminTicketDetailsComponent,
+
   ],
   declarations: [
     AdminComponent,
     TicketlistComponent,
-    AdminTicketDetailsComponent     
+    AdminTicketDetailsComponent,
+    FilterPipe,
+    SortByPipe
   ],
-  providers:[
+  providers: [
   ]
 })
 export class AdminModule { }

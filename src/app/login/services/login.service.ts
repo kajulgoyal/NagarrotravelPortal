@@ -1,14 +1,23 @@
+  
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserRegister } from 'src/app/models/userRegister';
 import { stringify } from 'querystring';
 import { user } from 'src/app/models/user.interface';
 import { Admin } from 'src/app/models/admin';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class LoginService {
 
-  constructor(private http: HttpClient) {}
+  url :string = "https://raw.githubusercontent.com/sagarshirbhate/Country-State-City-Database/master/Contries.json";
+
+  constructor(private http:HttpClient) { }
+
+  allCountries(): Observable<any>{
+    return this.http.get(this.url);
+  }
+  
   getUserByEmail(email:string) {
     return this.http.get<user>(`http://localhost:8081/travelApi/v1/userByEmail?email=${email}`); 
   }
@@ -46,11 +55,10 @@ export class LoginService {
 
   sendForgotPasswordMail(username:string,password:string){
     
-    let subject = "Forgot Password request on Nagarro Travel"  ; 
-    let text = "<h1> You have requested for credentials to Nagarro travel portal</h1>"+
-          "<br> Your credentials are mentioned below. Please do not share it with anyone"+
-          "<br><b>Username </b>: "+username+
-          "<br><b>Password </b>: "+password
+    let subject = "Nagarro Travel Portal Information"  ; 
+    let text = "You have requested your user name and password for the your access to the Nagarro Travel Portal:<br><b>Username</b>: "+username+
+    "<br><b>Password</b> : "+password+"<br>Please contact the Travel team if you have any questions.<br>Thank you,<br>Nagarro Travel Team";
+    
 
     subject = encodeURIComponent(subject); 
     text = encodeURIComponent(text)

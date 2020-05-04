@@ -6,10 +6,10 @@ import { AdminTicketDetailsComponent } from './adminticketdetails/adminticketdet
 
 const routes: Routes = [
   { path: 'signin', component: SigninComponent },
-  { path : 'ticketlist' , component : TicketlistComponent},
-  { path : 'adminticketdetails/:id', component : AdminTicketDetailsComponent}
+  { path: 'ticketlist', component: TicketlistComponent },
+  { path: 'adminticketdetails/:id', component: AdminTicketDetailsComponent }
 ];
- 
+
 @NgModule({
   declarations: [],
   imports: [

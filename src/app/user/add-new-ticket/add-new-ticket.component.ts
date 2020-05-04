@@ -51,7 +51,7 @@ export class AddNewTicketComponent {
     this.fromlocationControl=new FormControl('', [Validators.required]);
     this.startdateControl=new FormControl('', [Validators.required]);
     this.enddateControl=new FormControl('', [Validators.required]);
-    this.durationControl=new FormControl('', [Validators.required]); 
+    this.durationControl=new FormControl(''); 
     this.passportControl=new FormControl('', [Validators.required,Validators.maxLength(9)]);
     this.approverControl=new FormControl('');
     this.projectnameControl=new FormControl('', [Validators.required]);
@@ -90,42 +90,40 @@ export class AddNewTicketComponent {
   }
 
   onFormSubmit(){
-    if(this.regForm.valid && this.regForm.get('ticketDetails').valid){
-     let ticket = {
-       ticket:{
-         user:{
-           id:  this.user.id
-         },
-         type:{
-           id: this.regForm.get('type').value
-         }
-       },
-       ticketDetails:{
-         details: this.regForm.get('ticketDetails').value
-       }
-     }
-     ticket.ticketDetails.details.status = 'submitted';
-
-     this.service.saveTicket(ticket).subscribe((response)=>{
-       if(response.status==200){
-        let ticket1 : NewTicket ={
-          id:response.body['id'],
-          type:{
-            id:this.regForm.get('type').value,
-            name: ''
+    if (this.regForm.valid && this.regForm.get('ticketDetails').valid) {
+      let ticket = {
+        ticket: {
+          user: {
+            id: this.user.id
           },
-          details:ticket.ticketDetails.details
-        } 
-        response.body['id']
-         this.router.navigate(['/ticketconfirm',JSON.stringify(ticket1)])
-        
-       }else{
-         alert('server error occured');
-       }
-     })
-      
+          type: {
+            id: this.regForm.get('type').value
+          }
+        },
+        ticketDetails: {
+          details: this.regForm.get('ticketDetails').value
+        }
+      }
+      this.service.saveTicket(ticket).subscribe((response) => {
+        if (response.status == 200) {
+          let ticket1: NewTicket = {
+            id: response.body['id'],
+            type: {
+              id: this.regForm.get('type').value,
+              name: ''
+            },
+            details: ticket.ticketDetails.details
+          }
+          response.body['id']
+          this.router.navigate(['/ticketconfirm', JSON.stringify(ticket1)])
+
+        } else {
+          alert('server error occured');
+        }
+      })
+
     }
-    else{
+    else {
 
     }
   }

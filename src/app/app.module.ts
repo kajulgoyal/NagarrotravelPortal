@@ -8,6 +8,7 @@ import {LOCAL_STORAGE, WebStorageService, StorageServiceModule} from 'angular-we
 import { UserModule } from './user/user.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminModule } from './admin/admin.module';
     LoginModule,
     HttpClientModule,
     UserModule,
-    AdminModule
+    AdminModule,
+    FormsModule
   ], 
   providers: [LoginService
   ],

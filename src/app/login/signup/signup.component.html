@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <div class="card text-center ml-5" style="width: 30rem; height: 35rem;">
+    <div class="card ml-5" style="width: 35rem; min-height: 35rem;">
         <div class="card-body">
-            <h4 class="card-title">REGISTERATION</h4>
+            <h4 class="card-title">REGISTRATION</h4>
             <hr>
             <form [formGroup]="regForm" validate (ngSubmit)="onFormSubmit()">
 
@@ -19,54 +19,76 @@
                 <div class="form sign-up ">
                     <div class="form-row ">
                         <div class="form-group col-md-6 ">
-                            <input type="text " class="form-control " formControlName="firstName" [ngClass]="getControlValidationClasses(firstNameControl)" id="firstname " placeholder="First Name ">
+                            <label>Enter First Name</label>
+                            <input type="text " class="form-control form-control-sm " formControlName="firstName" [ngClass]="getControlValidationClasses(firstNameControl)" id="firstname " placeholder="First Name ">
                         </div>
                         <div class="form-group col-md-6 ">
-                            <input type="text " class="form-control " formControlName="lastName" [ngClass]="getControlValidationClasses(lastNameControl)" id="lastname " placeholder="Last Name ">
+                            <label>Enter Last Name</label>
+                            <input type="text " class="form-control form-control-sm " formControlName="lastName" [ngClass]="getControlValidationClasses(lastNameControl)" id="lastname " placeholder="Last Name ">
                         </div>
                     </div>
                     <div class="form-row ">
                         <div class="form-group col-md-6 ">
-                            <select class="form-control " id="bu" formControlName="businessUnit" [ngClass]="getControlValidationClasses(businessUnitControl)">
+                            <label>Select your Business Unit</label>
+                            <select class="form-control form-control-sm " id="bu" formControlName="businessUnit" [ngClass]="getControlValidationClasses(businessUnitControl)">
                           
                                 <option *ngFor="let bu of businessUnits" [value] = bu.id>{{ bu.name}}</option>
                             
                         </select>
                         </div>
                         <div class="form-group col-md-6 ">
-                            <input type="text " class="form-control " formControlName="title" [ngClass]="getControlValidationClasses(titleControl)" id="title " placeholder="Title ">
+                            <label>Enter Your title</label>
+                            <input type="text " class="form-control form-control-sm " formControlName="title" [ngClass]="getControlValidationClasses(titleControl)" id="title " placeholder="Title ">
                         </div>
                     </div>
                     <div class="form-row ">
                         <div class="form-group col-md-6 ">
-                            <input type="email " class="form-control " formControlName="email" [ngClass]="getControlValidationClasses(emailControl)" id="email " placeholder="E-mail address ">
+                            <label>Enter Email</label>
+                            <input type="email " class="form-control form-control-sm " formControlName="email" [ngClass]="getControlValidationClasses(emailControl)" id="email " placeholder="E-mail address ">
                         </div>
                         <div class="form-group col-md-6 ">
-                            <input type="text " class="form-control " formControlName="telephone" [ngClass]="getControlValidationClasses(phoneControl)" id="phone " placeholder="Telephone ">
+                            <label>Enter Phone Number</label>
+                            <input type="text " class="form-control form-control-sm " formControlName="telephone" [ngClass]="getControlValidationClasses(phoneControl)" id="phone " placeholder="Telephone ">
                         </div>
                     </div>
                     <div formGroupName="address">
-                        <div class="form-group ">
-                            <input type="text " class="form-control " formControlName="address1" [ngClass]="getControlValidationClasses(address1Control)" id="inputAddress " placeholder="Address 1 ">
-                        </div>
-                        <div class="form-group ">
-                            <input type="text " class="form-control " formControlName="address2" [ngClass]="getControlValidationClasses(address2Control)" id="inputAddress2 " placeholder="Address 2 ">
-                        </div>
-                        <div class="form-group ">
-                            <input type="text " class="form-control " formControlName="country" [ngClass]="getControlValidationClasses(countryControl)" id="country " placeholder="Country ">
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+                                <label>Enter Address Line 1</label>
+                                <input type="text " class="form-control form-control-sm " formControlName="address1" [ngClass]="getControlValidationClasses(address1Control)" id="inputAddress " placeholder="Address 1 ">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Enter Address Line 2 (if any)</label>
+                                <input type="text " class="form-control form-control-sm " formControlName="address2" [ngClass]="getControlValidationClasses(address2Control)" id="inputAddress2 " placeholder="Address 2 ">
+                            </div>
                         </div>
                         <div class="form-row ">
-                            <div class="form-group col-md-5 ">
-                                <input type="text " class="form-control " formControlName="city" [ngClass]="getControlValidationClasses(cityControl)" id="city " placeholder="City ">
+                            <div class="form-group col-md-3">
+                                <label>Select Country</label>
+                                <select class="form-control form-control-sm" (change)="onChangeCountry($event.target.value)" formControlName="country" [ngClass]="getControlValidationClasses(countryControl)">
+                              <option *ngFor="let country of countryInfo; let i = index" value="{{i}}">{{country.CountryName}}</option>
+                            </select>
                             </div>
-                            <div class="form-group col-md-4 ">
-                                <select id="inputState " class="form-control " formControlName="state" [ngClass]="getControlValidationClasses(stateControl)">
-                            <option selected disabled>State</option>
-                            <option>Delhi</option>
-                        </select>
+
+                            <div class="form-group col-md-3">
+                                <label>Select State</label>
+                                <select class="form-control form-control-sm" (change)="onChangeState($event.target.value)" formControlName="state" [ngClass]="getControlValidationClasses(stateControl)"> 
+                                 
+                                  <option *ngFor="let state of stateInfo; let j = index" value="{{j}}">{{state.StateName}}</option>
+                                </select>
                             </div>
+
+                            <div class="form-group col-md-3">
+                                <label>Select City</label>
+                                <select class="form-control form-control-sm" formControlName="city" [ngClass]="getControlValidationClasses(cityControl)">
+                                    
+                                  <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option>
+                                </select>
+                            </div>
+
                             <div class="form-group col-md-3 ">
-                                <input type="text " class="form-control " formControlName="zipcode" [ngClass]="getControlValidationClasses(zipcodeControl)" id="inputZip " placeholder="ZipCode ">
+                                <label>Enter ZipCode</label>
+                                <input type="text " class="form-control form-control-sm " formControlName="zipcode" [ngClass]="getControlValidationClasses(zipcodeControl)" id="inputZip " placeholder="ZipCode ">
                             </div>
                         </div>
                     </div>
@@ -75,10 +97,11 @@
                     </p>
                     <div class="form-row ">
 
-                        <div class="form-group col-md-6 ">
+                        <div class="form-group col-md-3 "></div>
+                        <div class="form-group col-md-3 ">
                             <button class="btn active " type="submit ">REGISTER</button>
                         </div>
-                        <br>
+
                         <div class="form-group col-md-6" style="text-align-last: center;">
 
                             Already Have an account?<a class=" ml-2 " routerLink="/signin">LOGIN</a>

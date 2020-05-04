@@ -10,27 +10,26 @@ import { ticketDetails } from 'src/app/models/ticketDetails.interface';
   styleUrls: ['adminticketdetails.component.css']
 })
 export class AdminTicketDetailsComponent {
-  Ticket : tickets;
-  ticketDetails : ticketDetails[];
-  id : string;
+  Ticket: tickets;
+  ticketDetails: ticketDetails[];
+  id: string;
 
   constructor(
-    private router : Router,
-    private route : ActivatedRoute,
+    private router: Router,
+    private route: ActivatedRoute,
     private userservice: UserService
-  ) {  }
-  
+  ) { }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = JSON.parse(params['id']);
     });
     this.userservice.getTicketById(this.id)
-    .subscribe((ticket : tickets) => {
-       // localStorage.setItem("ticket",JSON.stringify(ticket));
-       this.Ticket=ticket;
-       this.ticketDetails=ticket.ticketDetails;
-    console.log(this.Ticket);
-  })
+      .subscribe((ticket: tickets) => {
+        this.Ticket = ticket;
+        this.ticketDetails = ticket.ticketDetails;
+        console.log(this.Ticket);
+      })
   }
   backToHome() {
     this.router.navigateByUrl('/ticketlist')

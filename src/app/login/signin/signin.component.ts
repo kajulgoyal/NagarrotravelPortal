@@ -66,7 +66,7 @@ export class SigninComponent {
           localStorage.setItem("user",JSON.stringify(user));
 
           this.errorMessage="";
-          this.router.navigate(['/mytickets']);
+          this.router.navigate(['/dashboard']);
         }
         else{
           this.errorMessage="Password not correct";

@@ -31,38 +31,42 @@
       style="border-bottom-color:purple">
       <h1 class="heading">Ticket List</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group mr-2">
-          <div class="d-flex">
-            <input type="text" class="form-control mr-2" placeholder="Filter">
-            <button class="btn btn-sm btn-outline-dark dropdown-toggle mr-2" id="filter" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">Filter By</button>
-            <div class="dropdown-menu" for="sort">
-              <a class="dropdown-item" href="#">Priority</a>
-              <a class="dropdown-item active" href="#">Date</a>
-            </div>
-          </div>
-          <button class="btn btn-sm btn-outline-dark dropdown-toggle mr-2" id="sort" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Sort By</button>
-          <div class="dropdown-menu" for="sort">
-            <a class="dropdown-item" href="#">Priority</a>
-            <a class="dropdown-item active" href="#">Date</a>
-          </div>
+
+        <div class="d-flex">
+          <input #filter type="text" class="form-control mr-2 btn-outline-dark"
+            (change)='onOptionsSelected(filter.value)' placeholder="Filter">
+          <select #filterby id="filterby" class="btn-outline-dark rounded p-1 mr-2"
+            (change)='setFilterkey(filterby.value)'>
+            <option value="" disabled selected>Filter By</option>
+            <option value="priority">Priority</option>
+            <option value="project">Project name</option>
+            <option value="approver">BU head</option>
+            <option value="tolocation">Travel City</option>
+
+          </select>
+          <select #sort id="sort" class="btn-outline-dark rounded p-2 mr-2" (change)='onOptionsSelected(sort.value)'>
+            <option value="" disabled selected>Sort By</option>
+            <option value="priority">Priority</option>
+            <option value="date">Date</option>
+          </select>
         </div>
         <button class="btn btn-sm btn-outline-dark">View resolved tickets</button>
       </div>
     </div>
-    
-    <div class="card border-dark text-center mx-auto mb-3 shadow" *ngFor="let t of Tickets | paginate: { itemsPerPage: 2, currentPage: p }"  style="max-width: 60rem;"
-      (click)="getDetails(t.id)">
+
+    <div class="card border-dark text-center mx-auto mb-3 shadow"
+      *ngFor="let t of Tickets | paginate: { itemsPerPage: 5, currentPage: p } | sortBy : 'desc' : sort.value | filter : filter.value"
+      style="max-width: 60rem;" (click)="getDetails(t.id)">
       <div class="card-body">
         <div class="card-title">
           <h3>{{ t.type.name }}</h3>
         </div>
         <div class="d-flex mt-3 justify-content-center">
-    
+
           <h5><span class="badge badge-info p-3 mr-4">Ticket Id - {{ t.id }}</span></h5>
           <h5><span class="badge badge-danger p-3 mr-4">Priority - {{ t.ticketDetails[0].details.priority }}</span></h5>
-          <h5><span class="badge badge-info p-3 mr-4">Project Name - {{ t.ticketDetails[0].details.projectname }}</span></h5>
+          <h5><span class="badge badge-info p-3 mr-4">Project Name - {{ t.ticketDetails[0].details.projectname }}</span>
+          </h5>
           <h5><span class="badge badge-dark p-3 mr-4">Submission Date - {{ t.created_on | date }}</span></h5>
         </div>
       </div>
@@ -70,13 +74,14 @@
     <hr>
     <div style="text-align: center;">
 
-        <pagination-controls class="my-pagination" (pageChange)="p = $event" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-        </pagination-controls>
+      <pagination-controls class="my-pagination" (pageChange)="p = $event" screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
     </div>
     <br>
 
-    
-    </main>
-    </body>
+
+  </main>
+</body>
 
 </html>

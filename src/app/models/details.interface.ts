@@ -1,4 +1,8 @@
-
+export enum Priority {
+    'IMMEDIATE' = 1,
+    'URGENT' = 2,
+    'NORMAL' = 3
+}
 export interface details{
 
     status : string;
