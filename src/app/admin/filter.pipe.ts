@@ -28,12 +28,12 @@ export class FilterPipe implements PipeTransform {
       }
     }
 
-    if (!searchText)
+    if (!searchText && !keyword)
       return this.t;
     searchText = searchText.toLowerCase();
-    if (keyword === 'priority') {
+    if (keyword === 'priority' && searchText) {
       return this.t.filter(it => {
-        return it.ticketDetails[0].details.priority.toLowerCase().match(searchText);
+        return it.ticketDetails[0].details.priority.toLowerCase().includes(searchText);
       });
     }
     else if (keyword === 'project') {

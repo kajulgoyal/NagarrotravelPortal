@@ -6,14 +6,19 @@ import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.compone
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
 import { TicketlistComponent } from '../admin/ticketlist/ticketlist.component';
 import { AdminTicketDetailsComponent } from '../admin/adminticketdetails/adminticketdetails.component';
+import { AuthGuardLoggedInService } from '../services/AuthGuardLoggedIn.service';
 
 const routes: Routes = [
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'forgot', component: ForgotPasswordComponent },
-  { path:'registrationConfirm',component:RegistrationConfirmComponent},
-  { path : 'ticketlist' , component : TicketlistComponent},
-  { path : 'adminticketdetails/:id', component : AdminTicketDetailsComponent},
+  { path: 'signup', component: SignupComponent ,canActivate: [AuthGuardLoggedInService],
+  children:[
+    { path: '**', redirectTo: '/signup', pathMatch: 'full' },
+
+  ]},
+  { path: 'signin', component: SigninComponent,canActivate: [AuthGuardLoggedInService] },
+  { path: 'forgot', component: ForgotPasswordComponent ,canActivate: [AuthGuardLoggedInService]},
+  { path:'registrationConfirm',component:RegistrationConfirmComponent,canActivate: [AuthGuardLoggedInService]},
+  { path : 'ticketlist' , component : TicketlistComponent,canActivate: [AuthGuardLoggedInService]},
+  { path : 'adminticketdetails/:id', component : AdminTicketDetailsComponent,canActivate: [AuthGuardLoggedInService]},
   
   { path: '', redirectTo: '/signin', pathMatch: 'full' }
  

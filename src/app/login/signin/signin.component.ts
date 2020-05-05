@@ -5,6 +5,8 @@ import { Admin } from 'src/app/models/admin';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ticketDetails } from 'src/app/models/ticketDetails.interface';
+import { tickets } from 'src/app/models/tickets.interface';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-signin',
@@ -28,7 +30,8 @@ export class SigninComponent {
   }
   constructor(
     private loginservice: LoginService,
-    private router:Router
+    private router:Router,
+    private sessionService :SessionService
   ) { } 
 
  
@@ -48,25 +51,14 @@ export class SigninComponent {
       
         if(this.password===user.password)
         {
-          user.tickets.forEach((ticket)=>{
-            ticket.ticketDetails.sort((a:ticketDetails,b:ticketDetails):number=>{
-              if(a.id>b.id){
-                return -1
-              }
-              if(a.id<b.id){
-                return 1
-              }
-              else{
-                return 0;
-              }
-            })
-
-          })
+          
           console.log(user)
+          
           localStorage.setItem("user",JSON.stringify(user));
+          this.sessionService.updateSessionUserDetails();
 
           this.errorMessage="";
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/mytickets']);
         }
         else{
           this.errorMessage="Password not correct";
@@ -88,7 +80,7 @@ export class SigninComponent {
           localStorage.setItem("user",JSON.stringify(user.user_id));
 
           this.errorMessage="";
-          this.router.navigate(['/ticketlist']);
+          this.router.navigateByUrl('/ticketlist');
         } 
         else{
           this.errorMessage="Password not correct";

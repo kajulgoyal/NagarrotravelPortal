@@ -19,21 +19,21 @@ export class LoginService {
   }
   
   getUserByEmail(email:string) {
-    return this.http.get<user>(`http://localhost:8081/travelApi/v1/userByEmail?email=${email}`); 
+    return this.http.get<user>(`http://localhost:8081/nagarroTravelsApi/userByEmail?email=${email}`); 
   }
 
   getAllBusinessUnits(){
-    return this.http.get(`http://localhost:8081/travelApi/v1/BusinessUnits`);
+    return this.http.get(`http://localhost:8081/nagarroTravelsApi/BusinessUnits`);
 
   }
 
   getAdminByEmail(email:string){
-    return this.http.get<Admin>(`http://localhost:8081/travelApi/v1/adminByEmail?email=${email}`); 
+    return this.http.get<Admin>(`http://localhost:8081/nagarroTravelsApi/adminByEmail?email=${email}`); 
   }
 
   registerUser(user : UserRegister){
 
-    return this.http.post('http://localhost:8081/travelApi/v1/users',user,{observe: 'response'})
+    return this.http.post('http://localhost:8081/nagarroTravelsApi/users',user,{observe: 'response'})
 
   }
 
@@ -49,7 +49,7 @@ export class LoginService {
     text = encodeURIComponent(text)
 
 
-    return this.http.get(`http://localhost:8081/travelApi/v1/send-mail?email=${username}&subject=${subject}&text=${text}`); 
+    return this.http.get(`http://localhost:8081/nagarroTravelsApi/send-mail?email=${username}&subject=${subject}&text=${text}`); 
     
   }
 
@@ -64,7 +64,7 @@ export class LoginService {
     text = encodeURIComponent(text)
 
 
-    return this.http.get(`http://localhost:8081/travelApi/v1/send-mail?email=${username}&subject=${subject}&text=${text}`); 
+    return this.http.get(`http://localhost:8081/nagarroTravelsApi/send-mail?email=${username}&subject=${subject}&text=${text}`); 
     
   }
 

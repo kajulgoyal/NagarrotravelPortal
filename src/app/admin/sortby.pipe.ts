@@ -14,7 +14,7 @@ export class SortByPipe implements PipeTransform {
 
   transform(Tickets: tickets[], order = '', column: string = ''): tickets[] {
 
-    if (order === '') { return Tickets; }
+    //if (order === '') { return Tickets; }
     if ((column === '') || (column === 'date')) {
       column = "created_on";
       return orderBy(Tickets, [column], [order]);

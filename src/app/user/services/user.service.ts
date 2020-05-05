@@ -9,15 +9,15 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getTickets() {
-    return this.http.get(`http://localhost:8081/travelApi/v1/tickets`);
+    return this.http.get(`http://localhost:8081/nagarroTravelsApi/tickets`);
   }
 
   getTicketById(id: string) {
-    return this.http.get(`http://localhost:8081/travelApi/v1/tickets/${id}`);
+    return this.http.get(`http://localhost:8081/nagarroTravelsApi/tickets/${id}`);
   }
 
   getTicketTypes(){
-    return this.http.get<{id:BigInteger,name:string}[]>(`http://localhost:8081/travelApi/v1/ticketType`);
+    return this.http.get<{id:BigInteger,name:string}[]>(`http://localhost:8081/nagarroTravelsApi/ticketType`);
   }
  
 
@@ -37,10 +37,10 @@ export class UserService {
   }
 
   saveTicket(ticket){
-    return this.http.post(`http://localhost:8081/travelApi/v1/tickets`,ticket,{observe: 'response'});
+    return this.http.post(`http://localhost:8081/nagarroTravelsApi/tickets`,ticket,{observe: 'response'});
   }
 
   saveTicketDetails(ticket){
-    return this.http.post(`http://localhost:8081/travelApi/v1/ticketDetails`,ticket,{observe: 'response'});
+    return this.http.post(`http://localhost:8081/nagarroTravelsApi/ticketDetails`,ticket,{observe: 'response'});
   }
 }
