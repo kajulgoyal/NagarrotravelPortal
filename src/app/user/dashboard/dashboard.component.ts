@@ -76,7 +76,4 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  signOut() {
-    this.router.navigateByUrl('/signin');
-  }
 }

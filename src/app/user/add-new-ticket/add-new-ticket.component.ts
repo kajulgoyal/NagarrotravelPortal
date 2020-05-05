@@ -128,7 +128,4 @@ export class AddNewTicketComponent {
     }
   }
 
-  signOut() {
-    this.router.navigateByUrl('/signin');
-  }
 }

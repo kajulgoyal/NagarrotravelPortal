@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent,canActivate: [AuthGuardLoggedInService] },
   { path: 'forgot', component: ForgotPasswordComponent ,canActivate: [AuthGuardLoggedInService]},
   { path:'registrationConfirm',component:RegistrationConfirmComponent,canActivate: [AuthGuardLoggedInService]},
-  { path : 'ticketlist' , component : TicketlistComponent,canActivate: [AuthGuardLoggedInService]},
-  { path : 'adminticketdetails/:id', component : AdminTicketDetailsComponent,canActivate: [AuthGuardLoggedInService]},
+  { path : 'ticketlist' , component : TicketlistComponent},
+  { path : 'adminticketdetails/:id', component : AdminTicketDetailsComponent},
   
   { path: '', redirectTo: '/signin', pathMatch: 'full' }
  

@@ -12,6 +12,8 @@ import { ticketDetails } from 'src/app/models/ticketDetails.interface';
   styleUrls: ['ticketlist.component.css']
 })
 export class TicketlistComponent {
+
+ 
   Tickets: tickets[];
   ticketDetails: ticketDetails[];
   p: number = 1;
@@ -41,5 +43,6 @@ export class TicketlistComponent {
   getDetails(id) {
     this.router.navigate(["/adminticketdetails", JSON.stringify(id)]);
   }
+  
 }
 export var keyword: string;
