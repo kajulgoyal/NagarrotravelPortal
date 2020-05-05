@@ -13,13 +13,12 @@ export class SortByPipe implements PipeTransform {
   ticketDetails: ticketDetails[];
 
   transform(Tickets: tickets[], order = '', column: string = ''): tickets[] {
-
-    //if (order === '') { return Tickets; }
+    console.log(column);
     if ((column === '') || (column === 'date')) {
       column = "created_on";
       return orderBy(Tickets, [column], [order]);
     }
-    else {
+    else if(column === 'priority'){
       Tickets.sort((a: any, b: any) => {
         if (Priority[a.ticketDetails[0].details.priority.toUpperCase()] < Priority[b.ticketDetails[0].details.priority.toUpperCase()]) {
           return -1;
@@ -30,6 +29,9 @@ export class SortByPipe implements PipeTransform {
         }
       });
       return Tickets;
+    }
+    else {
+      return orderBy(Tickets, [column], [order]);
     }
   }
 }

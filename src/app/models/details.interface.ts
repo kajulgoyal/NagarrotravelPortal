@@ -9,7 +9,7 @@ export interface details{
     priority : string;
     approver : string;
     fromlocation : string;
-    tolocation : string;
+    travelcity : string;
     startdate : string;
     enddate : string;
     duration : string;

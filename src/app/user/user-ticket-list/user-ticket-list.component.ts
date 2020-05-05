@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { user } from 'src/app/models/user.interface';
 import { tickets } from 'src/app/models/tickets.interface';
 import { UserService } from '../services/user.service';
+import { ticketDetails } from 'src/app/models/ticketDetails.interface';
+import { orderBy } from 'lodash';
 
 @Component({
   selector: 'app-user-ticket-list',
@@ -16,7 +18,6 @@ export class UserTicketListComponent implements OnInit{
   p: number = 1;
 
   
-  
   constructor( 
     private router: Router,
     private route : ActivatedRoute,
@@ -24,19 +25,19 @@ export class UserTicketListComponent implements OnInit{
   ) { }
   
   ngOnInit() {
-    /*this.route.params.subscribe(params => {
-      this.id = JSON.parse(params['id']);
-    });*/
+
     this.User = JSON.parse(localStorage.getItem('user')) as user;
     this.Tickets = this.User.tickets;
-
-    /*this.userservice.getTickets(this.id)
-    .subscribe((ticket : tickets[]) => {
-       this.Tickets=ticket;*/
-        console.log(this.Tickets);
-  //})
-
+    for(let ticket of this.Tickets) {
+      this.sortDetails(ticket.ticketDetails);
+    }
+    console.log(this.Tickets);
   }
+
+  sortDetails(detail : ticketDetails[]) {
+    return orderBy(detail, "id" , 'desc');
+  }
+  
  getDetails(id) {
       this.router.navigate(['/details',JSON.stringify(id)]);
    }

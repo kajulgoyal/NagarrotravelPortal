@@ -11,10 +11,13 @@
 </head>
 
 <body>
-    <div class="card text-center mr-5 m-3" style="width: 23rem; height: 30rem;">
+    <div style="max-height: 200px;">
+        <h2>WELCOME TO NAGARRO TRAVELS !!</h2>
+    </div>
+    <div class="card text-center bg-custom mr-5 m-3 rounded" style="width: 23rem; height: 30rem;">
         <div class="card-body">
             <br>
-            <h4 class="card-title">LOGIN</h4>
+            <h3 class="card-title">LOGIN</h3>
             <hr>
             <br>
             <div class="form-signin">
@@ -27,7 +30,7 @@
                     <input type="password" id="inputPassword" class="form-control border-bottom mr-3" placeholder="Password" #password (input)="onPasswordInput(password.value)" required>
                     <a id=" forgot " routerLink="/forgot">Forgot?</a>
                 </div>
-                <p *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</p>
+                <p *ngIf="errorMessage" style="color:white;">{{ errorMessage }}</p>
                 <br>
                 <button class="btn active mb-5 ml-2 " type="submit " (click)="onUserLogin()">LOGIN</button>
                 <button class="btn active ml-3 mb-5 " type="submit " (click)="onAdminLogin()">LOGIN AS ADMIN</button>

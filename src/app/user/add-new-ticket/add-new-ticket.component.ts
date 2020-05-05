@@ -6,6 +6,8 @@ import { DatePipe } from '@angular/common';
 import { ticketDetails } from 'src/app/models/ticketDetails.interface';
 import { user } from 'src/app/models/user.interface';
 import { NewTicket } from 'src/app/models/newTicket';
+import { SessionService } from 'src/app/services/session.service';
+import { LoginService } from 'src/app/login/services/login.service';
 
 @Component({
   selector: 'app-add-new-ticket',
@@ -15,70 +17,75 @@ import { NewTicket } from 'src/app/models/newTicket';
 
 export class AddNewTicketComponent {
 
-  regForm : FormGroup;
-  errorMessage:string;
-  user:user;
-  ticketTypes:{id:BigInteger,name:string}[];
- 
+  regForm: FormGroup;
+  errorMessage: string;
+  user: user;
+  ticketTypes: { id: BigInteger, name: string }[];
+  countryInfo : any[] =[];
+
 
   constructor(
-    private service :UserService,
+    private service: UserService,
+    private sessionService: SessionService,
+    private loginservice : LoginService,
     private router: Router) { }
-  
-  typeControl:FormControl;
-  priorityControl:FormControl;
-  travelcityControl:FormControl;
-  fromlocationControl:FormControl;
-  startdateControl:FormControl;
-  enddateControl:FormControl;
-  durationControl:FormControl;
-  passportControl:FormControl;
-  projectnameControl:FormControl;
-  upperboundControl:FormControl;
-  detailsControl:FormControl;
-  approverControl:FormControl;
-  expenseborneControl:FormControl;
+
+  typeControl: FormControl;
+  priorityControl: FormControl;
+  travelcityControl: FormControl;
+  fromlocationControl: FormControl;
+  startdateControl: FormControl;
+  enddateControl: FormControl;
+  durationControl: FormControl;
+  passportControl: FormControl;
+  projectnameControl: FormControl;
+  upperboundControl: FormControl;
+  detailsControl: FormControl;
+  approverControl: FormControl;
+  expenseborneControl: FormControl;
 
   ngOnInit() {
 
-    this.service.getTicketTypes().subscribe((response)=>{
-      this.ticketTypes=response;
+    this.getCountries();
+
+    this.service.getTicketTypes().subscribe((response) => {
+      this.ticketTypes = response;
     })
 
-    this.typeControl=new FormControl('', [Validators.required]);
-    this.priorityControl=new FormControl('', [Validators.required]);
-    this.travelcityControl=new FormControl('', [Validators.required]);
-    this.fromlocationControl=new FormControl('', [Validators.required]);
-    this.startdateControl=new FormControl('', [Validators.required]);
-    this.enddateControl=new FormControl('', [Validators.required]);
-    this.durationControl=new FormControl(''); 
-    this.passportControl=new FormControl('', [Validators.required,Validators.maxLength(9)]);
-    this.approverControl=new FormControl('');
-    this.projectnameControl=new FormControl('', [Validators.required]);
-    this.detailsControl=new FormControl('', [Validators.required]);
-    this.upperboundControl=new FormControl('');
-    this.expenseborneControl=new FormControl('', [Validators.required]);
+    this.typeControl = new FormControl('', [Validators.required]);
+    this.priorityControl = new FormControl('', [Validators.required]);
+    this.travelcityControl = new FormControl('', [Validators.required]);
+    this.fromlocationControl = new FormControl('', [Validators.required]);
+    this.startdateControl = new FormControl('', [Validators.required]);
+    this.enddateControl = new FormControl('', [Validators.required]);
+    this.durationControl = new FormControl('');
+    this.passportControl = new FormControl('', [Validators.required, Validators.maxLength(9)]);
+    this.approverControl = new FormControl('');
+    this.projectnameControl = new FormControl('', [Validators.required]);
+    this.detailsControl = new FormControl('', [Validators.required]);
+    this.upperboundControl = new FormControl('');
+    this.expenseborneControl = new FormControl('', [Validators.required]);
 
     this.user = JSON.parse(localStorage.getItem('user'));
 
     //initialize form group
 
-    this.regForm= new FormGroup({
-      type : this.typeControl,
+    this.regForm = new FormGroup({
+      type: this.typeControl,
       ticketDetails: new FormGroup({
-      priority : this.priorityControl,
-      travelcity : this.travelcityControl,
-      fromlocation : this.fromlocationControl,
-      startdate : this.startdateControl,
-      enddate : this.enddateControl,
-      duration : this.durationControl,
-      passport : this.passportControl,
-      approver : this.approverControl,
-      projectname : this.projectnameControl,
-      details : this.detailsControl,
-      upperbound : this.upperboundControl,
-      expenseborne : this.expenseborneControl
-    })
+        priority: this.priorityControl,
+        travelcity: this.travelcityControl,
+        fromlocation: this.fromlocationControl,
+        startdate: this.startdateControl,
+        enddate: this.enddateControl,
+        duration: this.durationControl,
+        passport: this.passportControl,
+        approver: this.approverControl,
+        projectname: this.projectnameControl,
+        details: this.detailsControl,
+        upperbound: this.upperboundControl,
+        expenseborne: this.expenseborneControl
+      })
     })
   }
 
@@ -89,7 +96,7 @@ export class AddNewTicketComponent {
     };
   }
 
-  onFormSubmit(){
+  onFormSubmit() {
     if (this.regForm.valid && this.regForm.get('ticketDetails').valid) {
       let ticket = {
         ticket: {
@@ -104,6 +111,9 @@ export class AddNewTicketComponent {
           details: this.regForm.get('ticketDetails').value
         }
       }
+      
+     ticket.ticketDetails.details.status = 'submitted';
+
       this.service.saveTicket(ticket).subscribe((response) => {
         if (response.status == 200) {
           let ticket1: NewTicket = {
@@ -115,6 +125,7 @@ export class AddNewTicketComponent {
             details: ticket.ticketDetails.details
           }
           response.body['id']
+          this.sessionService.updateSessionUserDetails();
           this.router.navigate(['/ticketconfirm', JSON.stringify(ticket1)])
 
         } else {
@@ -126,6 +137,17 @@ export class AddNewTicketComponent {
     else {
 
     }
+  }
+
+  getCountries(){
+    this.loginservice.allCountries().
+    subscribe(
+      data2 => {
+        this.countryInfo=data2.Countries;
+      },
+      err => console.log(err),
+      () => console.log('complete')
+    )
   }
 
 }

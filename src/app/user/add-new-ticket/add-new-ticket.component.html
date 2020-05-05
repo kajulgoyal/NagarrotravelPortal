@@ -50,19 +50,15 @@
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            Travel City:
+                                            Travel Location :
                                             <select id="travelcity" class="form-control" formControlName="travelcity" [ngClass]="getControlValidationClasses(travelcityControl)">
-                                            <!-- <option selected>Request </option> -->
-                                            <option value ="1" selected>Chikago</option>
-                                            <option value ="1">Delhi</option>
-                                            <option value ="1">Mumbai </option>
+                                            <option *ngFor="let country of countryInfo" [value]=country.CountryName>{{country.CountryName}}</option>
                                         </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             From Location:
                                             <select id="fromlocation" class="form-control" formControlName="fromlocation" [ngClass]="getControlValidationClasses(fromlocationControl)">
-                                            <option selected value ="1">Delhi</option>
-                                            <option value ="1">Mumbai</option>
+                                            <option *ngFor="let country of countryInfo" [value]=country.CountryName>{{country.CountryName}}</option>
                                         </select>
                                         </div>
                                     </div>
@@ -98,11 +94,11 @@
                                     <div class="form-row">
                                         Expense Borne: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <div class="custom-control custom-radio custom-control-inline col-md-3 ">
-                                            <input type="radio" id="customRadioInline1" value="dvfvf" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
+                                            <input type="radio" id="customRadioInline1" value="Nagarro" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
                                             <label class="custom-control-label" for="customRadioInline1">Nagarro</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline col-md-3">
-                                            <input type="radio" id="customRadioInline2" value="mmd" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
+                                            <input type="radio" id="customRadioInline2" value="Client" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
                                             <label class="custom-control-label" for="customRadioInline2">Client</label>
                                         </div>
                                     </div>

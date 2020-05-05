@@ -41,12 +41,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ticket of ticketDetails;">
+        <tr *ngFor="let ticket of ticketDetails">
           <th scope="row">{{ ticket.id }}</th>
           <td>{{ Ticket.type.name }}</td>
           <td>{{  ticket.details.priority }}</td>
           <td>{{  ticket.details.status }}</td>
-          <td>{{ ticket.details.tolocation }}</td>
+          <td>{{ ticket.details.travelcity }}</td>
           <td>{{  ticket.details.fromlocation }}</td>
           <td>{{ ticket.details.startdate }}</td>
           <td>{{ ticket.details.enddate }}</td>

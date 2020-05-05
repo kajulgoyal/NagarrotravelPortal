@@ -59,7 +59,7 @@ export class EditTicketComponent implements OnInit {
 
     this.typeControl=new FormControl(this.ticket.type.id, [Validators.required]);
     this.priorityControl=new FormControl(this.details.priority, [Validators.required]);
-    this.travelcityControl=new FormControl(this.details.tolocation, [Validators.required]);
+    this.travelcityControl=new FormControl(this.details.travelcity, [Validators.required]);
     this.fromlocationControl=new FormControl(this.details.fromlocation, [Validators.required]);
     this.startdateControl=new FormControl(this.details.startdate, [Validators.required]);
     this.enddateControl=new FormControl(this.details.enddate, [Validators.required]);

@@ -45,9 +45,9 @@ export class FilterPipe implements PipeTransform {
       return this.t.filter(it => {
         return it.ticketDetails[0].details.approver.toLowerCase().match(searchText);
       });
-    } else if (keyword === 'tolocation') {
+    } else if (keyword === 'travelcity') {
       return this.t.filter(it => {
-        return it.ticketDetails[0].details.tolocation.toLowerCase().match(searchText);
+        return it.ticketDetails[0].details.travelcity.toLowerCase().match(searchText);
       });
     }
   }

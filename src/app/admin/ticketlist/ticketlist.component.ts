@@ -4,7 +4,7 @@ import { user } from 'src/app/models/user.interface';
 import { tickets } from 'src/app/models/tickets.interface';
 import { UserService } from 'src/app/user/services/user.service';
 import { ticketDetails } from 'src/app/models/ticketDetails.interface';
-
+import { orderBy } from 'lodash';
 
 @Component({
   selector: 'app-ticketlist',
@@ -28,8 +28,14 @@ export class TicketlistComponent {
     this.userservice.getTickets()
       .subscribe((tickets: tickets[]) => {
         this.Tickets = tickets;
-      })
+      for(let ticket of this.Tickets) {
+      this.sortDetails(ticket.ticketDetails);
+    }
+  })
     console.log(this.Tickets);
+  }
+  sortDetails(detail : ticketDetails[]) {
+    return orderBy(detail, "id" , 'desc');
   }
   onTextInput(text: string) {
     console.log(text);
