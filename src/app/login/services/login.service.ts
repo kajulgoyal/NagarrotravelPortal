@@ -40,10 +40,10 @@ export class LoginService {
   sendConformationMail(username:string,password:string){
     
     let subject = "Registration successful"  ; 
-    let text = "<h1> You have successfully registered to Nagarro travel portal</h1>"+
+    let text = "<h2> You have successfully registered to Nagarro travels</h2>"+
           "<br> Your credentials are mentioned below. Please do not share it with anyone"+
-          "<br><b>Username </b>: "+username+
-          "<br><b>Password </b>: "+password
+          "<br><br><b>Username </b>: "+username+
+          "<br><b>Password </b>: "+password+"<br><br>Thank you,<br>Nagarro Travels Team"
 
     subject = encodeURIComponent(subject); 
     text = encodeURIComponent(text)
@@ -55,9 +55,9 @@ export class LoginService {
 
   sendForgotPasswordMail(username:string,password:string){
     
-    let subject = "Nagarro Travel Portal Information"  ; 
-    let text = "You have requested your user name and password for the your access to the Nagarro Travel Portal:<br><b>Username</b>: "+username+
-    "<br><b>Password</b> : "+password+"<br>Please contact the Travel team if you have any questions.<br>Thank you,<br>Nagarro Travel Team";
+    let subject = "Nagarro Travels Credentials"  ; 
+    let text = "You have requested your user name and password for the your access to the Nagarro Travels:<br><br><b>Username</b>: "+username+
+    "<br><b>Password</b> : "+password+"<br><br>Please contact the Travel team if you have any questions.<br><br>Thank you,<br>Nagarro Travels Team";
     
 
     subject = encodeURIComponent(subject); 

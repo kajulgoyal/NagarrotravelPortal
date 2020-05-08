@@ -58,7 +58,7 @@ export class SigninComponent {
           this.sessionService.updateSessionUserDetails();
 
           this.errorMessage="";
-          this.router.navigate(['/mytickets']);
+          this.router.navigate(['/dashboard']);
         }
         else{
           this.errorMessage="Password not correct";
@@ -77,7 +77,7 @@ export class SigninComponent {
         if(this.password===user.user_id.password)
         {
           
-          localStorage.setItem("user",JSON.stringify(user.user_id));
+          localStorage.setItem("admin",JSON.stringify(user.user_id));
 
           this.errorMessage="";
           this.router.navigateByUrl('/ticketlist');

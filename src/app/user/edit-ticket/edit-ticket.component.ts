@@ -7,6 +7,7 @@ import { ticketDetails } from 'src/app/models/ticketDetails.interface';
 import { user } from 'src/app/models/user.interface';
 import { NewTicket } from 'src/app/models/newTicket';
 import { details } from 'src/app/models/details.interface';
+import { LoginService } from 'src/app/login/services/login.service';
 
 @Component({
   selector: 'app-edit-ticket',
@@ -21,11 +22,12 @@ export class EditTicketComponent implements OnInit {
   ticketTypes:{id:BigInteger,name:string}[];
   details:details;
   ticket:NewTicket;
- 
+  countryInfo : any[] =[];
  
 
   constructor(
     private service :UserService,
+    private loginservice : LoginService,
     private router: Router,
     private routeActivate : ActivatedRoute) { }
   
@@ -39,21 +41,24 @@ export class EditTicketComponent implements OnInit {
   passportControl:FormControl;
   projectnameControl:FormControl;
   upperboundControl:FormControl;
-  detailsControl:FormControl;
+  adddetailControl:FormControl;
   approverControl:FormControl;
   expenseborneControl:FormControl;
 
   ngOnInit() {
 
+    console.log(this.service.selectedTicket);
+
+    this.getCountries();
+
     this.service.getTicketTypes().subscribe((response)=>{
       this.ticketTypes=response;
     })
 
-
-
-    this.routeActivate.params.subscribe(params => {
+    /*this.routeActivate.params.subscribe(params => {
       this.ticket = JSON.parse(params['details']);
-    });
+    });*/
+    this.ticket = this.service.selectedTicket;
 
     this.details=this.ticket.details;
 
@@ -67,7 +72,7 @@ export class EditTicketComponent implements OnInit {
     this.passportControl=new FormControl(this.details.passport, [Validators.required,Validators.maxLength(9)]);
     this.approverControl=new FormControl(this.details.approver);
     this.projectnameControl=new FormControl(this.details.projectname, [Validators.required]);
-    this.detailsControl=new FormControl(this.details.adddetail, [Validators.required]);
+    this.adddetailControl=new FormControl(this.details.adddetail, [Validators.required]);
     this.upperboundControl=new FormControl(this.details.upperbound);
     this.expenseborneControl=new FormControl(this.details.expenseborne, [Validators.required]);
 
@@ -87,7 +92,7 @@ export class EditTicketComponent implements OnInit {
       passport : this.passportControl,
       approver : this.approverControl,
       projectname : this.projectnameControl,
-      details : this.detailsControl,
+      adddetail : this.adddetailControl,
       upperbound : this.upperboundControl,
       expenseborne : this.expenseborneControl
     })
@@ -132,6 +137,19 @@ export class EditTicketComponent implements OnInit {
     else{
         alert("form not valid");
     }
+  }
+  backToHome() {
+    this.router.navigateByUrl("/mytickets");
+  }
+  getCountries(){
+    this.loginservice.allCountries().
+    subscribe(
+      data2 => {
+        this.countryInfo=data2.Countries;
+      },
+      err => console.log(err),
+      () => console.log('complete')
+    )
   }
 
 }

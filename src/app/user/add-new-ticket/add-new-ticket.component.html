@@ -18,7 +18,7 @@
             <app-side></app-side>
             <!-- MAIN -->
             <div class="col">
-                <div class="card  mx-auto mt-2 text-center" style="max-width: 45rem; min-height: 43rem; border-color: black;">
+                <div class="card  mx-auto my-3 text-center" style="max-width: 45rem; min-height: 39rem; border-color: black;">
                     <div class="card-body">
                         <form [formGroup]="regForm" validate (ngSubmit)="onFormSubmit()">
                             <h4 class="card-title">Create New Ticket</h4>
@@ -40,7 +40,7 @@
                                             Priority:
                                             <select id="priority" class="form-control" formControlName="priority" [ngClass]="getControlValidationClasses(priorityControl)">
                                             
-                                            <option value ="Normal"selected>Normal</option>
+                                            <option value ="Normal" selected>Normal</option>
                                             <option value ="Urgent">Urgent</option>
                                             <option value="Immediate">Immediate </option>
                                         </select>
@@ -84,6 +84,9 @@
                                         <div class="form-group col-md-6">
                                             Passport No:
                                             <input type="text" class="form-control" id="passport" value="hcbdjhcb" placeholder="Passport No." formControlName="passport" [ngClass]="getControlValidationClasses(passportControl)">
+                                            <div class="invalid-feedback">
+                                                <p>No. can have max 9 letters</p>
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             Expected Duration of Travel:
@@ -122,7 +125,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             Any additional details:
-                                            <input type="text" class="form-control" id="details" placeholder="If any extra details..." formControlName="details" [ngClass]="getControlValidationClasses(detailsControl)">
+                                            <input type="text" class="form-control" id="details" placeholder="If any extra details..." formControlName="adddetail" [ngClass]="getControlValidationClasses(adddetailControl)">
                                         </div>
                                     </div>
                                 </div>

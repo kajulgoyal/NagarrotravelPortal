@@ -16,7 +16,8 @@ export class TicketlistComponent {
  
   Tickets: tickets[];
   ticketDetails: ticketDetails[];
-  p: number = 1;
+  p: number = 1;  
+  flag : boolean = true;
   constructor(
     private router: Router,
     private userservice: UserService
@@ -28,14 +29,24 @@ export class TicketlistComponent {
     this.userservice.getTickets()
       .subscribe((tickets: tickets[]) => {
         this.Tickets = tickets;
-      for(let ticket of this.Tickets) {
-      this.sortDetails(ticket.ticketDetails);
-    }
+        /*for (let ticket of tickets) {
+          this.flag = true;
+          for (let detail of ticket.ticketDetails) {
+            if ((detail.details.status === "Done")) {
+              this.flag = false;
+              break;
+            }
+          }
+          if (this.flag === true) {
+            this.Tickets.push(ticket);
+            console.log(ticket);
+          }
+        }*/
   })
     console.log(this.Tickets);
   }
   sortDetails(detail : ticketDetails[]) {
-    return orderBy(detail, "id" , 'desc');
+    return orderBy(detail, 'id' , 'desc');
   }
   onTextInput(text: string) {
     console.log(text);

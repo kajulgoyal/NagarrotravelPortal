@@ -1,5 +1,5 @@
 body {
-    background: url(../bg.jpg);
+    background: url("../../../assets/images/bgr.jpg");
     background-repeat: no-repeat;
     background-size: 1300px 650px;
     display: flex;
@@ -8,33 +8,63 @@ body {
     padding-bottom: 40px;
     padding-right: 60px;
 }
-
-a {
-    color: black;
+.card-title {
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #ffffff;
 }
 
-.card-title {
-    color: rgb(197, 59, 9);
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-control {
+    border: none;
+}
+
+.form-group {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .icon {
-    padding: 0px;
-    color: white;
-    min-width: 20px;
+    padding: 10px;
+    color: #ffffff;
+    min-width: 50px;
+    text-align: center;
 }
 
-h6 {
-    color: purple;
+a {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#forgot {
+    margin-top: 3%;
 }
 
 .btn {
-    background: linear-gradient(to right, rgb(150, 2, 150) 0%, rgb(53, 3, 53) 100%);
+    background: linear-gradient(to top, rgb(141, 39, 102) 0%, rgb(100, 3, 92) 100%);
     border: none;
     color: white;
     font-weight: 600;
-    padding: 10px 20px;
+    padding: 10px 13px;
     text-align: center;
-    display: inline-block;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 20px;
+}
+.bg-custom {
+   background : linear-gradient(to top, rgb(3, 3, 3) 0%, rgb(78, 36, 61) 100%);
 }

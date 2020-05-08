@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { user } from 'src/app/models/user.interface';
 import { tickets } from 'src/app/models/tickets.interface';
 import { UserService } from '../services/user.service';
 import { ticketDetails } from 'src/app/models/ticketDetails.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NewTicket } from 'src/app/models/newTicket';
+import { orderBy } from 'lodash';
+import { pluck, switchMap, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-ticket-details',
@@ -13,58 +16,60 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class TicketDetailsComponent implements OnInit {
 
-  regForm: FormGroup;
+
   id: string;
   Ticket: tickets;
   ticketDetails: ticketDetails[];
+  editTicket : NewTicket;
+  t : string = '';
   constructor(
     private router: Router,
     private userservice: UserService,
     private route: ActivatedRoute
   ) { }
 
-  commentsControl: FormControl;
-  attachmentControl: FormControl;
-
   ngOnInit() {
-
-    this.route.params.subscribe(params => {
-      this.id = JSON.parse(params['id']);
-    });
-
-    this.commentsControl = new FormControl('');
-    this.attachmentControl = new FormControl('');
-
-    this.regForm = new FormGroup({
-      comments: this.commentsControl,
-      attachment: this.attachmentControl
-    })
-
-    this.userservice.getTicketById(this.id)
-      .subscribe((ticket: tickets) => {
+    this.route.params
+      .pipe(
+        pluck('id'),
+        tap((id) => {
+          this.id = id;
+        }),
+        switchMap((id) => {
+          console.log('caling ticketById: ', id);
+          return this.userservice.getTicketById(id);
+        })
+      ).subscribe((ticket: any) => {
+        console.log('result: ', ticket);
         this.Ticket = ticket;
-        this.ticketDetails = ticket.ticketDetails;
-        console.log(this.Ticket);
-      })
-
+        this.ticketDetails = this.sortDetails(ticket.ticketDetails);
+        this.editTicket = {
+          id: parseInt(this.id, 10),
+          type: {
+            id: parseInt(ticket.type.id, 10),
+            name: ''
+          },
+          details: ticket.ticketDetails[0].details
+        }
+      });
+    
+  }
+  onEdit(){
+    console.log(this.editTicket);
+    this.userservice.selectedTicket = this.editTicket;
+    if(this.userservice.selectedTicket.details.status=="Done" || this.userservice.selectedTicket.details.status=="In process"){
+      alert("You cannot edit this ticket");
+    } else {
+    this.router.navigate(['/editTicket'])
+    }
+  }
+ 
+  sortDetails(detail : ticketDetails[]) {
+    return orderBy(detail, 'id' , 'desc');
   }
 
   backToHome() {
     this.router.navigateByUrl("/mytickets");
   }
 
-  getControlValidationClasses(control: FormControl) {
-    return {
-      'is-invalid': control.touched && control.invalid,
-      'is-valid': control.touched && control.valid
-    };
-  }
-
-  onFormSubmit() {
-    if (this.regForm.valid) {
-      alert('successfully added');
-    } else {
-      alert('server error occured');
-    }
-  }
 }

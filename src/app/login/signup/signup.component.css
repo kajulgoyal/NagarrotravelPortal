@@ -1,38 +1,81 @@
  body {
-     background: url(../bg.jpg);
+     background: url("../../../assets/images/bgr.jpg");
      background-repeat: no-repeat;
      background-size: 1300px 650px;
      display: flex;
      justify-content: center;
      padding-top: 30px;
-     padding-bottom: 40px;
-     padding-right: 60px;
+     padding-bottom: 20px;
+     padding-right: 40px;
  }
- 
  .card-title {
-     color: rgb(197, 59, 9);
- }
- 
- .form-sign-up {
-     width: 100%;
-     max-width: 330px;
-     padding: 15px;
-     margin: 0 auto;
- }
- 
- .btn {
-     background: linear-gradient(to right, rgb(150, 2, 150) 0%, rgb(53, 3, 53) 100%);
-     border: none;
-     color: white;
-     font-weight: 600;
-     padding: 10px 20px;
-     text-align: center;
-     display: inline-block;
-     cursor: pointer;
-     border-radius: 20px;
- }
- 
- a {
-     color: orangered;
-     font-weight: 600;
- }
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #ffffff;
+}
+input {
+    margin : 10px;
+    margin-top :15px;
+}
+select {
+    margin-top : 10px;
+}
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-control {
+    border: none;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+}
+
+.form-group {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.icon {
+    padding: 10px;
+    color: #ffffff;
+    min-width: 50px;
+    text-align: center;
+}
+
+a {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#forgot {
+    margin-top: 3%;
+}
+
+.btn {
+    background: linear-gradient(to top, rgb(141, 39, 102) 0%, rgb(100, 3, 92) 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.bg-custom {
+   background : linear-gradient(to top, rgb(3, 3, 3) 0%, rgb(78, 36, 61) 100%);
+}

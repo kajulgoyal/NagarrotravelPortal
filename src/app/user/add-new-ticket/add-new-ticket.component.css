@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+body {
+    background : linear-gradient(to bottom, rgb(238, 219, 227) 0%, rgba(32, 1, 19, 0.788) 100%);
+}
     #body-row {
         margin-left: 0;
         margin-right: 0;
@@ -82,7 +85,7 @@ h6 {
     color : purple;
 }
 #card-button {
-    background : linear-gradient(to right,rgb(150, 2, 150) 0%, rgb(53, 3, 53) 100%);
+    background: linear-gradient(to top, rgb(141, 39, 102) 0%, rgb(100, 3, 92) 100%);
     border: none;
     color: white;
     font-weight: 600;
@@ -90,8 +93,9 @@ h6 {
     text-align: center;
     display: inline-block;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 20px;
 }
+
 
 
 

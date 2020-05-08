@@ -5,8 +5,17 @@ import { Countries } from 'src/app/models/countries';
 
 @Injectable()
 export class UserService {
+  private _selectedTicket: any;
 
   constructor(private http: HttpClient) {}
+
+  set selectedTicket(ticket: any) {
+    this._selectedTicket = ticket;
+  }
+
+  get selectedTicket() {
+    return this._selectedTicket;
+  }
 
   getTickets() {
     return this.http.get(`http://localhost:8081/nagarroTravelsApi/tickets`);
@@ -19,7 +28,10 @@ export class UserService {
   getTicketTypes(){
     return this.http.get<{id:BigInteger,name:string}[]>(`http://localhost:8081/nagarroTravelsApi/ticketType`);
   }
- 
+
+  getTicketTypeById(id: number|string) {
+    return this.http.get<{id:number,name:string,templateId:number}>(`http://localhost:8081/nagarroTravelsApi/ticketType/${id}`);
+  }
 
   getCoronaUpdates(country:string){
     let date = new Date();

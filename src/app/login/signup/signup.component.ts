@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, Form, FormBuilder } from '@angular/forms'; 
+import { FormGroup, FormControl, Validators, Form, FormBuilder, AbstractControl } from '@angular/forms'; 
 import { UserRegister } from 'src/app/models/userRegister';
 import { BusinessUnit } from 'src/app/models/businessUnit';
 import { LoginService } from '../services/login.service';
@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
   regForm : FormGroup;
   user : UserRegister;
   todayDate:Date;
-  created_on:string
+  created_on:string;
   
 
   stateInfo: any[] = [];
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
 
     this.firstNameControl=new FormControl('', [Validators.required]);
     this.lastNameControl=new FormControl('', [Validators.required]);
-    this.emailControl=new FormControl('', [Validators.required,Validators.email]);
+    this.emailControl=new FormControl('', [Validators.required,this.emailValidator]);
     this.titleControl=new FormControl('', [Validators.required]);
     this.businessUnitControl=new FormControl('', [Validators.required]);
     this.phoneControl=new FormControl('', [Validators.required,Validators.maxLength(15)]);
@@ -67,7 +67,6 @@ export class SignupComponent implements OnInit {
     this.cityControl=new FormControl('', [Validators.required]);
     this.zipcodeControl=new FormControl('', [Validators.required]);
 
-    //initialize form group
 
     this.regForm= new FormGroup({
       firstName : this.firstNameControl,
@@ -89,6 +88,23 @@ export class SignupComponent implements OnInit {
     })
   }
 
+  
+  emailValidator(control: FormControl) { 
+    let email = control.value; 
+    if (email && email.indexOf("@") != -1) { 
+      let [_, domain] = email.split("@"); 
+      if (domain !== "nagarro.com") { 
+        return {
+          emailDomain: {
+            parsedDomain: domain
+          }
+        }
+      }
+    }
+    return null; 
+  }
+
+  
   getControlValidationClasses(control: FormControl) {
     return {
       'is-invalid': control.touched && control.invalid,

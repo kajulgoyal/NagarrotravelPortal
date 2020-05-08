@@ -18,10 +18,10 @@
             <app-side></app-side>
             <!-- MAIN -->
             <div class="col">
-                <div class="card  mx-auto mt-2 text-center" style="max-width: 45rem; min-height: 43rem; border-color: black;">
+                <div class="card  mx-auto m-3 text-center" style="max-width: 45rem; min-height: 43rem; border-color: black;">
                     <div class="card-body">
                         <form [formGroup]="regForm" validate (ngSubmit)="onFormSubmit()">
-                            <h4 class="card-title">Create New Ticket</h4>
+                            <h4 class="card-title">Edit your Ticket</h4>
                             <div>
 
                                 <div class="form-row">
@@ -40,7 +40,7 @@
                                             Priority:
                                             <select id="priority" class="form-control" formControlName="priority" [ngClass]="getControlValidationClasses(priorityControl)">
                                             
-                                            <option value ="Normal"selected>Normal</option>
+                                            <option value ="Normal" selected>Normal</option>
                                             <option value ="Urgent">Urgent</option>
                                             <option value="Immediate">Immediate </option>
                                         </select>
@@ -52,18 +52,15 @@
                                         <div class="form-group col-md-6">
                                             Travel City:
                                             <select id="travelcity" class="form-control" formControlName="travelcity" [ngClass]="getControlValidationClasses(travelcityControl)">
-                                            <!-- <option selected>Request </option> -->
-                                            <option value ="1" selected>Chikago</option>
-                                            <option value ="1">Delhi</option>
-                                            <option value ="1">Mumbai </option>
+                                                <option *ngFor="let country of countryInfo" [value]=country.CountryName>{{country.CountryName}}</option>
+                                        
                                         </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             From Location:
                                             <select id="fromlocation" class="form-control" formControlName="fromlocation" [ngClass]="getControlValidationClasses(fromlocationControl)">
-                                            <option selected value ="1">Delhi</option>
-                                            <option value ="1">Mumbai</option>
-                                        </select>
+                                                <option *ngFor="let country of countryInfo" [value]=country.CountryName>{{country.CountryName}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -80,10 +77,6 @@
 
                                         </div>
                                     </div>
-
-
-
-
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             Passport No:
@@ -98,11 +91,11 @@
                                     <div class="form-row">
                                         Expense Borne: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <div class="custom-control custom-radio custom-control-inline col-md-3 ">
-                                            <input type="radio" id="customRadioInline1" value="dvfvf" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
+                                            <input type="radio" id="customRadioInline1" value="Nagarro" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
                                             <label class="custom-control-label" for="customRadioInline1">Nagarro</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline col-md-3">
-                                            <input type="radio" id="customRadioInline2" value="mmd" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
+                                            <input type="radio" id="customRadioInline2" value="Client" name="expenseborne" class="custom-control-input" formControlName="expenseborne" [ngClass]="getControlValidationClasses(expenseborneControl)">
                                             <label class="custom-control-label" for="customRadioInline2">Client</label>
                                         </div>
                                     </div>
@@ -126,7 +119,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             Any additional details:
-                                            <input type="text" class="form-control" id="details" placeholder="If any extra details..." formControlName="details" [ngClass]="getControlValidationClasses(detailsControl)">
+                                            <input type="text" class="form-control" id="details" placeholder="If any extra details..." formControlName="adddetail" [ngClass]="getControlValidationClasses(adddetailControl)">
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +128,8 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4"></div>
                                 <div class="form-group col-md-4">
-                                    <button class="btn active mx-auto" type="submit" id="card-button">SUBMIT</button>
+                                    <button class="btn active " type="submit" id="card-button">SUBMIT</button>
+                                    <button class="btn active " type="submit" id="card-button" (click)="backToHome()">CANCEL</button>
                                 </div>
                                 <div class="form-group col-md-4"></div>
                             </div>

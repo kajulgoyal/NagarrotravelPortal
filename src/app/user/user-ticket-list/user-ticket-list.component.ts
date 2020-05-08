@@ -28,14 +28,11 @@ export class UserTicketListComponent implements OnInit{
 
     this.User = JSON.parse(localStorage.getItem('user')) as user;
     this.Tickets = this.User.tickets;
-    for(let ticket of this.Tickets) {
-      this.sortDetails(ticket.ticketDetails);
-    }
     console.log(this.Tickets);
   }
 
   sortDetails(detail : ticketDetails[]) {
-    return orderBy(detail, "id" , 'desc');
+    return orderBy(detail, 'id' , 'desc');
   }
   
  getDetails(id) {

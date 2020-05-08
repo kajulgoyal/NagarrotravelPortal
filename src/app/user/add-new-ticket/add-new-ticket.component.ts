@@ -40,7 +40,7 @@ export class AddNewTicketComponent {
   passportControl: FormControl;
   projectnameControl: FormControl;
   upperboundControl: FormControl;
-  detailsControl: FormControl;
+  adddetailControl: FormControl;
   approverControl: FormControl;
   expenseborneControl: FormControl;
 
@@ -62,7 +62,7 @@ export class AddNewTicketComponent {
     this.passportControl = new FormControl('', [Validators.required, Validators.maxLength(9)]);
     this.approverControl = new FormControl('');
     this.projectnameControl = new FormControl('', [Validators.required]);
-    this.detailsControl = new FormControl('', [Validators.required]);
+    this.adddetailControl = new FormControl('', [Validators.required]);
     this.upperboundControl = new FormControl('');
     this.expenseborneControl = new FormControl('', [Validators.required]);
 
@@ -82,7 +82,7 @@ export class AddNewTicketComponent {
         passport: this.passportControl,
         approver: this.approverControl,
         projectname: this.projectnameControl,
-        details: this.detailsControl,
+        adddetail: this.adddetailControl,
         upperbound: this.upperboundControl,
         expenseborne: this.expenseborneControl
       })

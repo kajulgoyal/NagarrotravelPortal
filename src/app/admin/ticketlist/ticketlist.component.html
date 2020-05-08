@@ -50,12 +50,11 @@
             <option value="date">Date</option>
           </select>
         </div>
-        <button class="btn btn-sm btn-outline-dark">View resolved tickets</button>
       </div>
     </div>
 
     <div class="card border-dark text-center mx-auto mb-3 shadow"
-      *ngFor="let t of Tickets | filter : filter.value | sortBy : 'desc' : sort.value | paginate: { itemsPerPage: 3, currentPage: p }"
+      *ngFor="let t of Tickets | filter : filter.value | sortBy : 'desc' : sort.value | paginate: { itemsPerPage: 5, currentPage: p }"
       style="max-width: 60rem;" (click)="getDetails(t.id)">
       <div class="card-body">
         <div class="card-title">
