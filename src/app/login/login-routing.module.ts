@@ -7,6 +7,7 @@ import { RegistrationConfirmComponent } from './registration-confirm/registratio
 import { TicketlistComponent } from '../admin/ticketlist/ticketlist.component';
 import { AdminTicketDetailsComponent } from '../admin/adminticketdetails/adminticketdetails.component';
 import { AuthGuardLoggedInService } from '../services/AuthGuardLoggedIn.service';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent ,canActivate: [AuthGuardLoggedInService],
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path:'registrationConfirm',component:RegistrationConfirmComponent,canActivate: [AuthGuardLoggedInService]},
   { path : 'ticketlist' , component : TicketlistComponent},
   { path : 'adminticketdetails/:id', component : AdminTicketDetailsComponent},
-  
+  { path: 'editUser', component: EditUserComponent ,canActivate: [AuthGuardLoggedInService]},  
   { path: '', redirectTo: '/signin', pathMatch: 'full' }
  
 ];

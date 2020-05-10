@@ -36,7 +36,9 @@ export class TicketconfirmComponent implements OnInit {
   }
  
   onEdit(){
-    this.router.navigate(['/editTicket',JSON.stringify(this.ticket)])
+    
+    this.userService.selectedTicket = this.ticket;
+    this.router.navigateByUrl('/editTicket')
   }
   print(){
   

@@ -66,8 +66,11 @@
     <textarea class="form-control col-md-3 mr-2 rounded" style="width:430px;" id="comments" rows="3"
       placeholder="Comments..." formControlName="comments" [ngClass]="getControlValidationClasses(commentsControl)"></textarea>
       <input type="text" class="form-control col-md-2 mr-2 rounded" id="attachment" placeholder="Attachment" style="width:230px;" formControlName="attachment" [ngClass]="getControlValidationClasses(attachmentControl)">
-      <input type="text" class="form-control col-md-2 mr-2 rounded" id="status" placeholder="Status" style="width:230px;" formControlName="status" [ngClass]="getControlValidationClasses(statusControl)">
-  </div>
+       <select class="form-control rounded" style="width:150px"formControlName="status" [ngClass]="getControlValidationClasses(statusControl)">
+        <option value ="in process">in process</option>
+        <option value ="done">done</option>
+    </select>
+   </div>
   </form>
   <div class="d-flex justify-content-center mt-3">
     <button class="btn mr-3" id="card-button" (click)="onFormSubmit()">Submit</button>

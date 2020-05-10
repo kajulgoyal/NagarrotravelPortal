@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CoronaDetails } from 'src/app/models/coronaDetails';
 import { Countries } from 'src/app/models/countries';
+import { ticketDetails } from 'src/app/models/ticketDetails.interface';
+import { tickets } from 'src/app/models/tickets.interface';
+import { orderBy } from 'lodash';
 
 @Injectable()
 export class UserService {
   private _selectedTicket: any;
+  private Tickets : tickets[]=[];
 
   constructor(private http: HttpClient) {}
 
@@ -18,9 +22,24 @@ export class UserService {
   }
 
   getTickets() {
-    return this.http.get(`http://localhost:8081/nagarroTravelsApi/tickets`);
+      this.http.get(`http://localhost:8081/nagarroTravelsApi/tickets`).subscribe((tickets: tickets[]) => {
+        //this.Tickets = this.sortDetails(tickets.ticketDetails);
+        //console.log(this.Tickets);
+        for (let ticket of tickets) {
+          ticket.ticketDetails=this.sortDetails(ticket.ticketDetails);
+        }
+        for (let ticket of tickets) {
+          if(ticket.ticketDetails[0].details.status !== "done") {
+              this.Tickets.push(ticket);
+          }
+        }
+      })
+      return this.Tickets;
   }
-
+  
+  sortDetails(detail : ticketDetails[]) {
+    return orderBy(detail, 'id' , 'desc');
+  }
   getTicketById(id: string) {
     return this.http.get(`http://localhost:8081/nagarroTravelsApi/tickets/${id}`);
   }

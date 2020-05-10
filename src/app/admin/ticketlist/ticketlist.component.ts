@@ -12,12 +12,12 @@ import { orderBy } from 'lodash';
   styleUrls: ['ticketlist.component.css']
 })
 export class TicketlistComponent {
-
  
-  Tickets: tickets[];
+  Tickets: tickets[]=[];
   ticketDetails: ticketDetails[];
   p: number = 1;  
-  flag : boolean = true;
+  flag : boolean;
+  keyword: string;
   constructor(
     private router: Router,
     private userservice: UserService
@@ -25,28 +25,8 @@ export class TicketlistComponent {
   }
 
   ngOnInit() {
-
-    this.userservice.getTickets()
-      .subscribe((tickets: tickets[]) => {
-        this.Tickets = tickets;
-        /*for (let ticket of tickets) {
-          this.flag = true;
-          for (let detail of ticket.ticketDetails) {
-            if ((detail.details.status === "Done")) {
-              this.flag = false;
-              break;
-            }
-          }
-          if (this.flag === true) {
-            this.Tickets.push(ticket);
-            console.log(ticket);
-          }
-        }*/
-  })
+    this.Tickets=this.userservice.getTickets();
     console.log(this.Tickets);
-  }
-  sortDetails(detail : ticketDetails[]) {
-    return orderBy(detail, 'id' , 'desc');
   }
   onTextInput(text: string) {
     console.log(text);
@@ -55,11 +35,10 @@ export class TicketlistComponent {
     console.log(value);
   }
   setFilterkey(value: string) {
-    keyword = value;
+    this.keyword = value;
   }
   getDetails(id) {
     this.router.navigate(["/adminticketdetails", JSON.stringify(id)]);
   }
   
 }
-export var keyword: string;

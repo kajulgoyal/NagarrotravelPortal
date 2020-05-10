@@ -10,6 +10,16 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class LoginService {
 
+  private _editUser : UserRegister;
+
+  get editUser(){
+    return this._editUser;
+  }
+
+  set editUser(user:UserRegister){
+    this._editUser=user;
+  }
+
   url :string = "https://raw.githubusercontent.com/sagarshirbhate/Country-State-City-Database/master/Contries.json";
 
   constructor(private http:HttpClient) { }
@@ -29,6 +39,12 @@ export class LoginService {
 
   getAdminByEmail(email:string){
     return this.http.get<Admin>(`http://localhost:8081/nagarroTravelsApi/adminByEmail?email=${email}`); 
+  }
+
+  updateUser(user : UserRegister){
+
+    return this.http.put(`http://localhost:8081/travelApi/v1/user/${user.id}`,user,{observe: 'response'})
+
   }
 
   registerUser(user : UserRegister){

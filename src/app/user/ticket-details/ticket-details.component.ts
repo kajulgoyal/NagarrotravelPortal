@@ -57,7 +57,7 @@ export class TicketDetailsComponent implements OnInit {
   onEdit(){
     console.log(this.editTicket);
     this.userservice.selectedTicket = this.editTicket;
-    if(this.userservice.selectedTicket.details.status=="Done" || this.userservice.selectedTicket.details.status=="In process"){
+    if(this.userservice.selectedTicket.details.status=="done" || this.userservice.selectedTicket.details.status=="in process"){
       alert("You cannot edit this ticket");
     } else {
     this.router.navigate(['/editTicket'])
